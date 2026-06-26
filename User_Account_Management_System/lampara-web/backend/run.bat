@@ -1,8 +1,5 @@
 @echo off
 <<<<<<< HEAD:User_Account_Management_System/lampara-web/backend/run.bat
-set LAMPARA_EMAIL=mang.tomas4k@gmail.com
-set LAMPARA_EMAIL_PASSWORD=lftb pwwe wcwo ztli
-java -jar target/lampara-backend.jar
 =======
 set LAMPARA_EMAIL='';
 set LAMPARA_EMAIL_PASSWORD='';
