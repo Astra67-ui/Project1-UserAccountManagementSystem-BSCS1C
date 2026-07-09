@@ -108,3 +108,8 @@ Auth uses `Authorization: Bearer <token>` header.
 
 See the previous guide — add `EmailOtpService.java` and a `/api/verify-otp` endpoint,
 then call it from the frontend after successful registration.
+
+Members:
+Bautista, Lucky P.
+Ammay, Gabriel F.
+Miguel, Jeril 
