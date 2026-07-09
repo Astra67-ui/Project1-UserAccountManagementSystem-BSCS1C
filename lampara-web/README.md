@@ -1,4 +1,4 @@
-# 🔦 LAMPARA — Web-Based User Account Management System
+#  LAMPARA — Web-Based User Account Management System
 
 Full-stack rewrite of the Swing desktop app:
 - **Frontend** → HTML + CSS + JavaScript (single file, no frameworks)
@@ -108,3 +108,8 @@ Auth uses `Authorization: Bearer <token>` header.
 
 See the previous guide — add `EmailOtpService.java` and a `/api/verify-otp` endpoint,
 then call it from the frontend after successful registration.
+
+# Participants: 
+1. Bautista, Lucky P.
+2. Ammay, Gabriel F.
+3. Miguel, Jeril
