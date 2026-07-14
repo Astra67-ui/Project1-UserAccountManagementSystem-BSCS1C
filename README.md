@@ -6,35 +6,6 @@ Full-stack rewrite of the Swing desktop app:
 - **Database** → MySQL (same `lampara_db` schema)
 
 ---
-
-## 📁 Project Structure
-
-```
-lampara-web/
-├── frontend/
-│   └── index.html          ← Open this in your browser
-├── backend/
-│   ├── pom.xml
-│   ├── schema.sql          ← Run this in MySQL first
-│   └── src/main/
-│       ├── java/com/lampara/
-│       │   ├── Main.java               ← Entry point (port 8080)
-│       │   ├── model/User.java
-│       │   ├── db/
-│       │   │   ├── DatabaseConnection.java
-│       │   │   └── UserStore.java
-│       │   ├── api/
-│       │   │   ├── AuthHandler.java    ← /api/register, /api/login, /api/logout
-│       │   │   └── UserHandler.java    ← /api/user/profile, /password, /account
-│       │   └── util/
-│       │       ├── HttpUtil.java
-│       │       └── SessionStore.java
-│       └── resources/
-│           └── db.properties          ← Database credentials
-```
-
----
-
 ## ⚙️ Setup (Step by Step)
 
 ### 1. Database
