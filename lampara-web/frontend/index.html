@@ -1581,23 +1581,31 @@ async function loadAdminPanel() {
         if (ok) {
             const tbody = document.getElementById('users-tbody');
             tbody.innerHTML = ''; // clear previous rows before re-rendering
-            data.Success.forEach(u => {
+            data.success.forEach(u => {
                 const row = document.createElement('tr');
                 row.style.borderBottom = '1px solid var(--border)';
-                row.innerHTML = `
-                    <td style="padding:12px 10px;">${u.firstName} ${u.lastName}</td>
-                    <td style="padding:12px 10px;">@${u.username}</td>
-                    <td style="padding:12px 10px;">${u.email}</td>
-                    <td style="padding:12px 10px;">${u.isVerified ? '✅' : '❌'}</td>
-                    <td style="padding:12px 10px;">${u.role}</td>
-                    <td style="padding:12px 10px;">
-                        <button class="btn btn-danger"
-                            onclick="adminDeleteUser('${u.username}')"
-                            style="padding:4px 10px; font-size:12px;">
-                            Delete
-                        </button>
-                    </td>
-                `;
+                const cell = (text) => {
+                  const td = document.createElement('td');
+                  td.style.padding = '12px 10px';
+                  td.textContent = text;
+                  return td;
+                };
+                row.appendChild(cell(`${u.firstName} ${u.lastName}`));
+                row.appendChild(cell(`@${u.username}`));
+                row.appendChild(cell(u.email));
+                row.appendChild(cell(u.isVerified ? '✅' : '❌'));
+                row.appendChild(cell(u.role));
+
+                const actionId = document.createElement('td');
+                actionId.style.padding = '12px 10px';
+                const delBtn = document.createElement('button');
+                delBtn.className = 'btn btn-danger';
+                delBtn.style.cssText = 'padding:4px 10px; font-size: 12px';
+                delBtn.textContent = 'Delete';
+                delBtn.addEventListener('click', () => adminDeleteUser(u.username));
+                actionId.appendChild(delBtn);
+                row.appendChild(actionId);
+                
                 tbody.appendChild(row);
             });
         } else {
@@ -1613,7 +1621,7 @@ async function adminDeleteUser(username) {
     const { ok, data } = await apiFetch('DELETE', '/api/admin/users', { username });
     if (ok) {
         toast(`User @${username} deleted.`, 'success');
-        loadAdminUsers(); // refresh the table
+        loadAdminPanel(); // refresh the table
     } else {
         toast(data.message || 'Failed to delete user.', 'error');
     }

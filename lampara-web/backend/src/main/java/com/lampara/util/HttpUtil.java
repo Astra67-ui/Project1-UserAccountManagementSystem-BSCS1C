@@ -5,9 +5,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
  
 public class HttpUtil {
 
@@ -60,7 +62,12 @@ public class HttpUtil {
         if (query == null || query.isBlank()) return map;
         for (String pair : query.split("&")) {
             String[] kv = pair.split("=", 2);
-            if (kv.length == 2) map.put(kv[0], kv[1]);
+            if (kv.length == 2) {
+                map.put(
+                    URLDecoder.decode(kv[0], StandardCharsets.UTF_8), 
+                    URLDecoder.decode(kv[1], StandardCharsets.UTF_8)
+                );
+            }
         }
         return map;
     }

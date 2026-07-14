@@ -23,6 +23,8 @@ public class UserStore {
             ps.setString(5, hash);
             ps.setString(6, "user");
             ps.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException dup) {
+            throw new SQLException("Username or email already taken.", dup);
         }
     }
  
@@ -183,25 +185,6 @@ public class UserStore {
             }
         }
         return users;
-    }
-    
-    // Admin method for account removal
-    public static void removeUserByAdmin(String username) throws SQLException {
-        try (Connection c = DatabaseConnection.getConnection();
-            PreparedStatement ps = c.prepareStatement("DELETE FROM users WHERE username=?")) {
-            ps.setString(1, username);
-            ps.executeUpdate();
-        }
-    }
-
-    // Admin method for role update
-    public static void updateRole(String username, String role) throws SQLException {
-        try (Connection c = DatabaseConnection.getConnection();
-        PreparedStatement ps = c.prepareStatement("UPDATE users SET role=? WHERE username=?")) {
-            ps.setString(1, role);
-            ps.setString(2, username);
-            ps.executeUpdate();
-        }
     }
  
     // ────────────────────────────────────────────────────────────────────

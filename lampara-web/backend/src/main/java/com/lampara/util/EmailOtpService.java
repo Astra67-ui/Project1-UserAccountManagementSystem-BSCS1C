@@ -10,8 +10,8 @@ import java.util.Properties;
 public class EmailOtpService {
  
     
-    private static final String FROM     = System.getenv("LAMPARA_EMAIL");
-    private static final String APP_PASS = System.getenv("LAMPARA_EMAIL_PASSWORD");
+    private static final String FROM     = System.getProperty("LAMPARA_EMAIL");
+    private static final String APP_PASS = System.getProperty("LAMPARA_EMAIL_PASSWORD");
  
     public static void sendOtp(String toEmail, String otp) throws MessagingException {
  
@@ -46,7 +46,7 @@ public class EmailOtpService {
             "<div style='background:#f0f9f9; border:2px solid #006666; border-radius:8px; padding:16px 24px; display:inline-block; margin:12px 0;'>" +
             "<span style='font-size:32px; font-weight:bold; letter-spacing:8px; color:#006666;'>" + otp + "</span>" +
             "</div>" +
-            "<p>This code is valid for the next 60 minutes and can only be used once.</p>" +
+            "<p>This code is valid for the next 10 minutes and can only be used once.</p>" +
             "<p>If you did not initiate this request, you can safely ignore this email. Someone may have typed your email address by mistake.</p>" +
             "<p>Do not share this code with other people. Keep it confidential.</p>" +
             "<br/>" +

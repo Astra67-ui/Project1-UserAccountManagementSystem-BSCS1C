@@ -10,11 +10,13 @@ import com.sun.net.httpserver.HttpHandler;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Random;
+import java.security.SecureRandom;
 
 // Authentication Handler Class 
 public class AuthHandler implements HttpHandler {
- 
+
+    private static final SecureRandom RNG = new SecureRandom();
+
     @Override
     public void handle(HttpExchange ex) throws IOException {
         if (HttpUtil.handleOptions(ex)) return;
@@ -51,10 +53,15 @@ public class AuthHandler implements HttpHandler {
                 || username.isEmpty() || password.isEmpty()) {
             HttpUtil.sendError(ex, 400, "Fill up all  required fields."); return;
         }
+
+        if (!firstName.matches("^[\\p{L} '-]{1,50}$") || !lastName.matches("^[\\p{L} '-]{1,50}$")) {
+        HttpUtil.sendError(ex, 400, "Names may only contain letters, spaces, hyphens, and apostrophes.");
+        return;
+        }
  
         // Email format
         if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
-            HttpUtil.sendError(ex, 400, "Email must follow a valid format."); return;
+            HttpUtil.sendError(ex,400, "Email must follow a valid format."); return;
         }
  
         // Password strength
@@ -87,10 +94,16 @@ public class AuthHandler implements HttpHandler {
  
         // generate OTP, save it, and email it
         String otp = generateOtp();
-        UserStore.saveOtp(email, otp, LocalDateTime.now().plusMinutes(60));
+        UserStore.saveOtp(email, otp, LocalDateTime.now().plusMinutes(10));
         EmailOtpService.sendOtp(email, otp);
  
-        HttpUtil.sendOk(ex, "Registration successful! Please check your email for the verification code.");
+        try {
+            EmailOtpService.sendOtp(email, otp);
+            HttpUtil.sendOk(ex, "Registration successful! Please check your email for the verification code.");
+        } catch (Exception mailEx) { 
+            mailEx.printStackTrace();
+            HttpUtil.sendOk(ex, "Account created, but we couldn't send the verification email right now. Use \"Resend code\" on the next screen to try again.");
+        }
     }
  
     // ── POST /api/login ──────────────────────────────────────────────────
@@ -191,9 +204,10 @@ public class AuthHandler implements HttpHandler {
  
         HttpUtil.sendOk(ex, "A new verification code has been sent to your email.");
     }
+
  
     // generate a random 6-digit OTP 
     private String generateOtp() {
-        return String.format("%06d", new Random().nextInt(999999));
+        return String.format("%06d", RNG.nextInt(1_000_000));
     }
 }

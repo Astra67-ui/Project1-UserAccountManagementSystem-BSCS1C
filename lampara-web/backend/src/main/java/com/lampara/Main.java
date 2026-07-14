@@ -5,10 +5,12 @@ import com.lampara.api.UserHandler;
 import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
+import com.lampara.util.EnvLoader;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        EnvLoader.load(".env");
         int port = 8080;
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);

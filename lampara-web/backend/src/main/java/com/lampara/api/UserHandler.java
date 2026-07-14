@@ -174,7 +174,7 @@ public class UserHandler implements HttpHandler {
                     .put("role",      u.role));    
             }
             JSONObject resp = new JSONObject();
-            resp.put("Success", arr);
+            resp.put("success", arr);
             HttpUtil.sendJson(ex, 200, resp);
         }
 
