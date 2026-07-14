@@ -1773,16 +1773,6 @@ async function doDeleteAccount() {
 }
 let adminUserToDelete = null;
 
-function openAdminDeleteModal(username) {
-  adminUserToDelete = username;
-  document.getElementById('admin-del-username').textContent = `@${username}`;
-  document.getElementById('modal-admin-delete').classList.add('open');
-}
-
-function closeAdminDeleteModal() {
-  document.getElementById('modal-admin-delete').classList.remove('open');
-  adminUserToDelete = null;
-}
 // Left panel particles 
 ['particles-login', 'particles-register', 'particles-otp'].forEach(id => {
   const container = document.getElementById(id);
