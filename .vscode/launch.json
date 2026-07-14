@@ -9,7 +9,8 @@
       "name": "Main",
       "request": "launch",
       "mainClass": "com.lampara.Main",
-      "projectName": "lampara-backend"
+      "projectName": "lampara-backend",
+      "cwd": "${workspaceFolder}/lampara-web/backend"
     },
     {
       "type": "chrome",
