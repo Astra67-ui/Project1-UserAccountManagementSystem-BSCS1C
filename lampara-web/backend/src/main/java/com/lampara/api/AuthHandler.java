@@ -95,7 +95,6 @@ public class AuthHandler implements HttpHandler {
         // generate OTP, save it, and email it
         String otp = generateOtp();
         UserStore.saveOtp(email, otp, LocalDateTime.now().plusMinutes(10));
-        EmailOtpService.sendOtp(email, otp);
  
         try {
             EmailOtpService.sendOtp(email, otp);
