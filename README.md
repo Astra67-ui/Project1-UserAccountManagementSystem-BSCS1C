@@ -1,8 +1,8 @@
 #  LAMPARA — Web-Based User Account Management System
 
-Full-stack rewrite of the Swing desktop app:
+Full-stack web-application tech stack:
 - **Frontend** → HTML + CSS + JavaScript (single file, no frameworks)
-- **Backend**  → Java HTTP server (no Tomcat, uses built-in `com.sun.net.httpserver`)
+- **Backend**  → Java HTTP server 
 - **Database** → MySQL (same `lampara_db` schema)
 
 ---
