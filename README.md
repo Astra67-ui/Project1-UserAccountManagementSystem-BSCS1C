@@ -1,5 +1,6 @@
 #  LAMPARA — Web-Based User Account Management System
 
+- User Account Management System is a software application that allows users to register, log in, manage their profiles, and securely access system features. It provides authentication, account management, and user data organization while helping maintain security and efficient access control.
 ---
 ## ⚙️ Setup (Step by Step)
 
