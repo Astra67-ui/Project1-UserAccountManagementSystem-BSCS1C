@@ -1,10 +1,5 @@
 #  LAMPARA — Web-Based User Account Management System
 
-Full-stack web-application tech stack:
-- **Frontend** → HTML + CSS + JavaScript (single file, no frameworks)
-- **Backend**  → Java HTTP server 
-- **Database** → MySQL (same `lampara_db` schema)
-
 ---
 ## ⚙️ Setup (Step by Step)
 
